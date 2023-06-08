@@ -7,6 +7,7 @@ prediction <- function(seq.num, k, inter.gene.list, promoter.range, enhancer.ran
 
     #print(paste(curi,"th running",sep=""))
     promoter.range1 <- promoter.range[promoter.range$gene.name == sub.gene.list[curi]] # find promoter loc of the tested gene
+    print(promoter.range1)
 
     candi.enhancer.range1<- GRanges(seqnames=seqnames(promoter.range1), IRanges(start=start(ranges(promoter.range1)) -enhancer.range,end=end(ranges(promoter.range1)) + enhancer.range),gene.name=promoter.range1$gene.name) # define enhancer region of the tested gene
     probe.id <- unique(queryHits(findOverlaps(train.meth.pos.range, candi.enhancer.range1))) # get loc of the methylation probes overlapped with the enhancer region

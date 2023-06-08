@@ -56,6 +56,7 @@ MethylTWAS <- function(example, train.meth.file, train.exp.file, test.meth.file,
   #load("/ix/ksoyeon/YQ/code/MethylTWAS/data/promoter.rda")
   data(promoter)
   promoter.range <- GRanges(seqnames = promoter$chrID, ranges = IRanges(start=promoter$start, end=promoter$end), strand = promoter$strand, gene.name =promoter$gene.name)
+  print(promoter.range)
 
   ##### select genes with promoter info and in training data #####
   inter.gene.list <-promoter.range$gene.name[promoter.range$gene.name %in% rownames(train.exp)]
