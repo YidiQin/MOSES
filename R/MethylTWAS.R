@@ -1,7 +1,7 @@
 #load("/ix/ksoyeon/eQTMs/GSE65205.data.Rdata") # observed expression for test
 
-#write.table(mvalue[1:10000,1:56], "/ix/ksoyeon/YQ/data/Yang.meth.train.txt",quote=F,sep="\t",col.names = TRUE, row.names = TRUE)
-#write.table(mvalue[1:10000,57:69], "/ix/ksoyeon/YQ/data/Yang.meth.test.txt",quote=F,sep="\t",col.names = TRUE, row.names = TRUE)
+#write.table(mvalue[,1:56], "/ix/ksoyeon/YQ/data/Yang.meth.train.txt",quote=F,sep="\t",col.names = TRUE, row.names = TRUE)
+#write.table(mvalue[,57:69], "/ix/ksoyeon/YQ/data/Yang.meth.test.txt",quote=F,sep="\t",col.names = TRUE, row.names = TRUE)
 #write.table(nonna.gene.exp[unique(row.names(nonna.gene.exp))[1:50],1:56], "/ix/ksoyeon/YQ/data/Yang.exp.train.txt",quote=F,sep="\t",col.names = TRUE, row.names = TRUE)
 #write.table(pheno[57:69,],"/ix/ksoyeon/YQ/data/Yang.pheno.txt",quote=F,sep="\t",col.names = TRUE, row.names = TRUE)
 
@@ -11,10 +11,20 @@
 #output.file.path <- "/ix/ksoyeon/YQ/results/test/"
 #pheno.file <-"/ix/ksoyeon/YQ/data/Yang.pheno.txt"
 
+#train.meth.1 <- mvalue[1:200000,1:56]
+#train.meth.2 <- mvalue[200001:423516,1:56]
+
+#library(usethis)
+#use_data(train.meth.1, overwrite = TRUE)
+#use_data(train.meth.2, overwrite = TRUE)
+
+
 MethylTWAS <- function(example, train.meth.file, train.exp.file, test.meth.file, pheno.file, output.file.path) {
   message("Importing data ...")
   if(example == TRUE){
-    data(train.meth)
+    data(train.meth.1)
+    data(train.meth.2)
+    train.meth <- rbind(train.meth.1, train.meth.2)
     data(train.exp)
     data(test.meth)
   }
