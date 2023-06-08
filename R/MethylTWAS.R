@@ -104,7 +104,7 @@ MethylTWAS <- function(example, train.meth.file, train.exp.file, test.meth.file,
   library(limma)
   confounder.var<- paste(unlist(strsplit(confounder, split = ",")),collapse="+")
   print(confounder.var)
-  design <- model.matrix(paste0("~0+",as.character(predictor),"+",confounder.var), data=pheno)
+  design <- model.matrix(as.formula(paste0("~0+",as.character(predictor),"+",confounder.var)), data=pheno)
   print(design)
   fit <- lmFit(pred.gene.exp, design)
   cont.matrix <- makeContrasts(paste0("CasevsControl=",as.character(predictor),"TRUE-",as.character(predictor),"FALSE"), levels=design)
