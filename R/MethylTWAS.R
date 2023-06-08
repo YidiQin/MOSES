@@ -1,7 +1,7 @@
 #load("/ix/ksoyeon/eQTMs/GSE65205.data.Rdata") # observed expression for test
 
-#write.table(mvalue[,1:56], "/ix/ksoyeon/YQ/data/Yang.meth.train.txt",quote=F,sep="\t",col.names = TRUE, row.names = TRUE)
-#write.table(mvalue[,57:69], "/ix/ksoyeon/YQ/data/Yang.meth.test.txt",quote=F,sep="\t",col.names = TRUE, row.names = TRUE)
+#write.table(mvalue[1:10000,1:56], "/ix/ksoyeon/YQ/data/Yang.meth.train.txt",quote=F,sep="\t",col.names = TRUE, row.names = TRUE)
+#write.table(mvalue[1:10000,57:69], "/ix/ksoyeon/YQ/data/Yang.meth.test.txt",quote=F,sep="\t",col.names = TRUE, row.names = TRUE)
 #write.table(nonna.gene.exp[unique(row.names(nonna.gene.exp))[1:50],1:56], "/ix/ksoyeon/YQ/data/Yang.exp.train.txt",quote=F,sep="\t",col.names = TRUE, row.names = TRUE)
 #write.table(pheno[57:69,],"/ix/ksoyeon/YQ/data/Yang.pheno.txt",quote=F,sep="\t",col.names = TRUE, row.names = TRUE)
 
