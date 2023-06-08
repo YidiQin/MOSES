@@ -81,6 +81,7 @@ MethylTWAS <- function(example, train.meth.file, train.exp.file, test.meth.file,
   k<-1
   while(length(seq.num) !=0 & k < 11) {
     print(paste(k,"th.running",sep=""))
+    message("Pass0")
     prediction(seq.num, k, inter.gene.list, promoter.range, enhancer.range,
                train.meth.pos.range, train.exp, train.meth, test.meth, lambda.rule,
                n, output.file.path)
