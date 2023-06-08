@@ -15,12 +15,14 @@
 #train.meth.2 <- mvalue[200001:423516,1:56]
 #test.meth <- mvalue[,57:69]
 #train.exp <- nonna.gene.exp[unique(row.names(nonna.gene.exp))[1:50],1:56]
+#load("/ix/ksoyeon/YQ/code/MethylTWAS/data/promoter.rda")
 
 #library(usethis)
 #use_data(train.meth.1, overwrite = TRUE)
 #use_data(train.meth.2, overwrite = TRUE)
 #use_data(test.meth, overwrite = TRUE)
 #use_data(train.exp, overwrite = TRUE)
+#use_data(promoter, overwrite = TRUE)
 
 MethylTWAS <- function(example, train.meth.file, train.exp.file, test.meth.file, pheno.file, output.file.path) {
   message("Importing data ...")
@@ -51,7 +53,8 @@ MethylTWAS <- function(example, train.meth.file, train.exp.file, test.meth.file,
 
   ##### load promoter info #####
   #promoter<-read.delim("/ix/ksoyeon/eQTMs/hg19_promoter.txt")
-  load("/ix/ksoyeon/YQ/code/MethylTWAS/data/promoter.rda")
+  #load("/ix/ksoyeon/YQ/code/MethylTWAS/data/promoter.rda")
+  data(promoter)
   promoter.range <- GRanges(seqnames = promoter$chrID, ranges = IRanges(start=promoter$start, end=promoter$end), strand = promoter$strand, gene.name =promoter$gene.name)
 
   ##### select genes with promoter info and in training data #####
