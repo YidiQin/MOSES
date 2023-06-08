@@ -69,6 +69,7 @@ MethylTWAS <- function(example, train.meth.file, train.exp.file, test.meth.file,
 
   ###### prediction #####
   library(parallel)
+  library(glmnet)
   message("Predicting expression ...")
   pred.gene.exp <- matrix(NA, ncol=n, nrow=length(inter.gene.list))
   rownames(pred.gene.exp) <- inter.gene.list
