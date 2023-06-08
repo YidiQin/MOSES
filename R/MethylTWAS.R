@@ -92,6 +92,7 @@ MethylTWAS <- function(example, train.meth.file, train.exp.file, test.meth.file,
   }
   pred.gene.exp <- pred.gene.exp
   save(list=c('pred.gene.exp'), file=paste0(output.file.path,"prediction.Rdata"))
+  message("Saving predicted gene expression ...")
 
   ###### TWAS #####
   if(example == TRUE){
