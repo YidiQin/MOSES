@@ -13,11 +13,14 @@
 
 #train.meth.1 <- mvalue[1:200000,1:56]
 #train.meth.2 <- mvalue[200001:423516,1:56]
+#test.meth <- mvalue[,57:69]
+#train.exp <- nonna.gene.exp[unique(row.names(nonna.gene.exp))[1:50],1:56]
 
 #library(usethis)
 #use_data(train.meth.1, overwrite = TRUE)
 #use_data(train.meth.2, overwrite = TRUE)
-
+#use_data(test.meth, overwrite = TRUE)
+#use_data(train.exp, overwrite = TRUE)
 
 MethylTWAS <- function(example, train.meth.file, train.exp.file, test.meth.file, pheno.file, output.file.path) {
   message("Importing data ...")
@@ -71,7 +74,7 @@ MethylTWAS <- function(example, train.meth.file, train.exp.file, test.meth.file,
   rownames(pred.gene.exp) <- inter.gene.list
   colnames(pred.gene.exp) <- colnames(test.meth)
   k<-1
-  while(length(seq.num) !=0 & k < 101) {
+  while(length(seq.num) !=0 & k < 11) {
     print(paste(k,"th.running",sep=""))
     prediction(seq.num, k, inter.gene.list, promoter.range, enhancer.range,
                train.meth.pos.range, train.exp, train.meth, test.meth, lambda.rule, n, output.file.path)
