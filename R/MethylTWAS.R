@@ -24,7 +24,7 @@
 #use_data(train.exp, overwrite = TRUE)
 #use_data(promoter, overwrite = TRUE)
 
-MethylTWAS <- function(example, train.meth.file, train.exp.file, test.meth.file, pheno.file, output.file.path) {
+MethylTWAS <- function(example, train.meth.file, train.exp.file, test.meth.file, pheno.file, predictor,confounder,output.file.path) {
   message("Importing data ...")
   if(example == TRUE){
     data(train.meth.1)
@@ -81,7 +81,8 @@ MethylTWAS <- function(example, train.meth.file, train.exp.file, test.meth.file,
   while(length(seq.num) !=0 & k < 11) {
     print(paste(k,"th.running",sep=""))
     prediction(seq.num, k, inter.gene.list, promoter.range, enhancer.range,
-               train.meth.pos.range, train.exp, train.meth, test.meth, lambda.rule, n, output.file.path)
+               train.meth.pos.range, train.exp, train.meth, test.meth, lambda.rule,
+               n, output.file.path)
     load(paste(output.file.path,".",k,"th.running.Rdata",sep=""))
     sub.exp <- sapply(pred.result, function(x) x[[1]])
     colnames(sub.exp) <- inter.gene.list[seq.num]
@@ -100,9 +101,10 @@ MethylTWAS <- function(example, train.meth.file, train.exp.file, test.meth.file,
     pheno <- read.table(pheno.file,sep="\t", header=TRUE)
   }
   library(limma)
-  design <- model.matrix(~0+cc_new+gender+age, data=pheno)
+  confounder.var<- paste(unlist(strsplit(confounder, split = ",")),collapse="+")
+  design <- model.matrix(paste0("~0+",as.character(predictor),"+",confounder.var), data=pheno)
   fit <- lmFit(pred.gene.exp, design)
-  cont.matrix <- makeContrasts(AtopicvsControl=cc_newTRUE-cc_newFALSE, levels=design)
+  cont.matrix <- makeContrasts(paste0("CasevsControl=",as.character(predictor),"TRUE-",as.character(predictor),"FALSE"), levels=design)
   fit2 <- contrasts.fit(fit, cont.matrix)
   fit2 <- eBayes(fit2)
   imputed.TWAS <- topTable(fit2, adjust="BH",number = Inf)
