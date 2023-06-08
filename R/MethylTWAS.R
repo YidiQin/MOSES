@@ -56,7 +56,6 @@ MethylTWAS <- function(example, train.meth.file, train.exp.file, test.meth.file,
   #load("/ix/ksoyeon/YQ/code/MethylTWAS/data/promoter.rda")
   data(promoter)
   promoter.range <- GRanges(seqnames = promoter$chrID, ranges = IRanges(start=promoter$start, end=promoter$end), strand = promoter$strand, gene.name =promoter$gene.name)
-  print(promoter.range)
 
   ##### select genes with promoter info and in training data #####
   inter.gene.list <-promoter.range$gene.name[promoter.range$gene.name %in% rownames(train.exp)]
@@ -81,7 +80,6 @@ MethylTWAS <- function(example, train.meth.file, train.exp.file, test.meth.file,
   k<-1
   while(length(seq.num) !=0 & k < 11) {
     print(paste(k,"th.running",sep=""))
-    message("Pass0")
     prediction(seq.num, k, inter.gene.list, promoter.range, enhancer.range,
                train.meth.pos.range, train.exp, train.meth, test.meth, lambda.rule,
                n, output.file.path)
@@ -107,6 +105,7 @@ MethylTWAS <- function(example, train.meth.file, train.exp.file, test.meth.file,
   confounder.var<- paste(unlist(strsplit(confounder, split = ",")),collapse="+")
   print(confounder.var)
   design <- model.matrix(paste0("~0+",as.character(predictor),"+",confounder.var), data=pheno)
+  print(design)
   fit <- lmFit(pred.gene.exp, design)
   cont.matrix <- makeContrasts(paste0("CasevsControl=",as.character(predictor),"TRUE-",as.character(predictor),"FALSE"), levels=design)
   fit2 <- contrasts.fit(fit, cont.matrix)
