@@ -24,7 +24,7 @@
 #use_data(train.exp, overwrite = TRUE)
 #use_data(promoter, overwrite = TRUE)
 
-MethylTWAS <- function(example, train.meth.file, train.exp.file, test.meth.file, pheno.file, predictor,confounder,output.file.path) {
+MethylTWAS <- function(example, train.meth.file, train.exp.file, test.meth.file, pheno.file, predictor, confounder, output.file.path) {
   message("Importing data ...")
   if(example == TRUE){
     data(train.meth.1)
