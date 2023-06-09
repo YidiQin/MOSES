@@ -99,7 +99,7 @@ MethylTWAS <- function(example = FALSE, train.meth.file, train.exp.file, test.me
     data(pheno)
   }
   else{
-    pheno <- load(pheno.file)
+    load(file = pheno.file)
     #pheno <- read.table(pheno.file,sep="\t", header=TRUE)
   }
   library(limma)
