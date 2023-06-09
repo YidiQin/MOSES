@@ -99,7 +99,8 @@ MethylTWAS <- function(example = FALSE, train.meth.file, train.exp.file, test.me
     data(pheno)
   }
   else{
-    pheno <- read.table(pheno.file,sep="\t", header=TRUE)
+    pheno <- load(pheno.file)
+    #pheno <- read.table(pheno.file,sep="\t", header=TRUE)
   }
   library(limma)
   confounder.var<- paste(unlist(strsplit(confounder, split = ",")),collapse="+")
