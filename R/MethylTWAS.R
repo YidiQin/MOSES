@@ -103,7 +103,9 @@ MethylTWAS <- function(example = FALSE, train.meth.file, train.exp.file, test.me
     #pheno <- read.table(pheno.file,sep="\t", header=TRUE)
   }
   library(limma)
+  print('pass000')
   confounder.var<- paste(unlist(strsplit(confounder, split = ",")),collapse="+")
+  print('pass00')
   design <- model.matrix(as.formula(paste0("~0+",as.character(predictor),"+",confounder.var)), data=pheno)
   print('pass0')
   fit <- lmFit(pred.gene.exp, design)
