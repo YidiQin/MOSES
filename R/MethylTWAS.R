@@ -24,7 +24,7 @@
 #use_data(train.exp, overwrite = TRUE)
 #use_data(promoter, overwrite = TRUE)
 
-MethylTWAS <- function(example = FALSE, train.meth.file, train.exp.file, test.meth.file, pheno.file, predictor, confounder, output.file.path) {
+MethylTWAS <- function(example = FALSE, train.meth.file, train.exp.file, test.meth.file, TWAS = TRUE, pheno.file, predictor, confounder, output.file.path) {
   message("Importing data ...")
   if(example == TRUE){
     data(train.meth.1)
@@ -45,7 +45,6 @@ MethylTWAS <- function(example = FALSE, train.meth.file, train.exp.file, test.me
     rm(temp3)
   }
   #train.meth <- read.table(train.meth.file,sep="\t", header=TRUE)
-  print(head(train.meth))
   library(GenomicRanges)
   train.meth.pos.range <- MatchPos(train.meth)
   #train.exp <- read.table(train.exp.file,sep="\t", header=TRUE)
@@ -102,6 +101,9 @@ MethylTWAS <- function(example = FALSE, train.meth.file, train.exp.file, test.me
   message("Saving predicted gene expression ...")
 
   ###### TWAS #####
+  if(TWAS == FALSE){
+    stop("skip TWAS ...")
+  }
   if(example == TRUE){
     data(pheno)
   }
