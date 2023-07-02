@@ -39,6 +39,7 @@ MethylTWAS <- function(example = FALSE, train.meth.file, train.exp.file, test.me
     load(file=test.meth.file)
   }
   #train.meth <- read.table(train.meth.file,sep="\t", header=TRUE)
+  print(head(train.meth))
   library(GenomicRanges)
   train.meth.pos.range <- MatchPos(train.meth)
   #train.exp <- read.table(train.exp.file,sep="\t", header=TRUE)
