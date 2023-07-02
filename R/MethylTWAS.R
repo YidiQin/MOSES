@@ -24,7 +24,7 @@
 #use_data(train.exp, overwrite = TRUE)
 #use_data(promoter, overwrite = TRUE)
 
-MethylTWAS <- function(example = FALSE, train.meth.file, train.exp.file, test.meth.file, TWAS = TRUE, pheno.file, predictor, confounder, output.file.path) {
+MethylTWAS <- function(example = FALSE, train.meth.file, train.exp.file, test.meth.file, TWAS = TRUE, pheno.file, phenotype, confounder, output.file.path, core.num = 1) {
   message("Importing data ...")
   if(example == TRUE){
     data(train.meth.1)
@@ -118,15 +118,15 @@ MethylTWAS <- function(example = FALSE, train.meth.file, train.exp.file, test.me
   #print('pass000')
   confounder.var<- paste(unlist(strsplit(confounder, split = ",")),collapse="+")
   #print('pass00')
-  #formula <- paste0("~0+",as.character(predictor),"+",confounder.var)
+  #formula <- paste0("~0+",as.character(phenotype),"+",confounder.var)
   #cmd0 <- paste("design <- model.matrix(as.formula(", formula, "), data=pheno)", sep = '')
   #eval(parse(text = cmd0))
-  design <- model.matrix(as.formula(paste0("~0+",as.character(predictor),"+",confounder.var)), data=pheno)
+  design <- model.matrix(as.formula(paste0("~0+",as.character(phenotype),"+",confounder.var)), data=pheno)
   #print('pass0')
   fit <- lmFit(pred.gene.exp, design)
   #print("pass1")
-  a <- paste0(as.character(predictor),"TRUE")
-  b <- paste0(as.character(predictor),"FALSE")
+  a <- paste0(as.character(phenotype),"TRUE")
+  b <- paste0(as.character(phenotype),"FALSE")
   #cont.matrix <- makeContrasts(paste0("CasevsControl=",a,"-",b), levels=design)
   #print("pass2")
   contrast <- paste0("CasevsControl=",a,"-",b)

@@ -1,7 +1,7 @@
 ##### A function to predict gene exp for test data using well-trained model #####
 
 library(glmnet)
-prediction <- function(seq.num, k, inter.gene.list, promoter.range, enhancer.range, train.meth.pos.range, train.exp, train.meth, test.meth, lambda.rule, n, output.file.path) {
+prediction <- function(seq.num, k, inter.gene.list, promoter.range, enhancer.range, train.meth.pos.range, train.exp, train.meth, test.meth, lambda.rule, n, output.file.path, core.num) {
   sub.gene.list <- inter.gene.list[seq.num] # select a subset of gene
   pred.result <- mclapply(1:length(sub.gene.list),function(curi) {
 
@@ -45,6 +45,6 @@ prediction <- function(seq.num, k, inter.gene.list, promoter.range, enhancer.ran
       pred <- rep(0, n)
     }
     list(pred=pred)
-  },mc.cores=1)
+  },mc.cores=core.num)
   save(pred.result, file=paste(output.file.path,".",k,"th.running.Rdata",sep=""))
 }
