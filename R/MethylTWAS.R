@@ -102,7 +102,7 @@ MethylTWAS <- function(example = FALSE, train.meth.file, train.exp.file, test.me
 
   ###### TWAS #####
   if(TWAS == FALSE){
-    stop("skip TWAS ...")
+    stop("\r skip TWAS ...")
   }
   if(example == TRUE){
     data(pheno)
@@ -114,24 +114,24 @@ MethylTWAS <- function(example = FALSE, train.meth.file, train.exp.file, test.me
     #pheno <- read.table(pheno.file,sep="\t", header=TRUE)
   }
   library(limma)
-  print('pass000')
+  #print('pass000')
   confounder.var<- paste(unlist(strsplit(confounder, split = ",")),collapse="+")
-  print('pass00')
+  #print('pass00')
   #formula <- paste0("~0+",as.character(predictor),"+",confounder.var)
   #cmd0 <- paste("design <- model.matrix(as.formula(", formula, "), data=pheno)", sep = '')
   #eval(parse(text = cmd0))
   design <- model.matrix(as.formula(paste0("~0+",as.character(predictor),"+",confounder.var)), data=pheno)
-  print('pass0')
+  #print('pass0')
   fit <- lmFit(pred.gene.exp, design)
-  print("pass1")
+  #print("pass1")
   a <- paste0(as.character(predictor),"TRUE")
   b <- paste0(as.character(predictor),"FALSE")
   #cont.matrix <- makeContrasts(paste0("CasevsControl=",a,"-",b), levels=design)
-  print("pass2")
+  #print("pass2")
   contrast <- paste0("CasevsControl=",a,"-",b)
   cmd <- paste("cont.matrix <- makeContrasts(", contrast, ", levels = design)", sep ='')
   eval(parse(text = cmd))
-  print("pass3")
+  #print("pass3")
   fit2 <- contrasts.fit(fit, cont.matrix)
   fit2 <- eBayes(fit2)
   imputed.TWAS <- topTable(fit2, adjust="BH",number = Inf)
