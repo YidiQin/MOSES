@@ -102,7 +102,8 @@ MethylTWAS <- function(example = FALSE, train.meth.file, train.exp.file, test.me
 
   ###### TWAS #####
   if(TWAS == FALSE){
-    stop("\r skip TWAS ...")
+    message("Skip TWAS ...")
+    stop_quietly()
   }
   if(example == TRUE){
     data(pheno)
