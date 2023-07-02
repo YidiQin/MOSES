@@ -88,7 +88,7 @@ MethylTWAS <- function(example = FALSE, train.meth.file, train.exp.file, test.me
     print(paste(k,"th.running",sep=""))
     prediction(seq.num, k, inter.gene.list, promoter.range, enhancer.range,
                train.meth.pos.range, train.exp, train.meth, test.meth, lambda.rule,
-               n, output.file.path)
+               n, output.file.path, core.num)
     load(paste(output.file.path,".",k,"th.running.Rdata",sep=""))
     sub.exp <- sapply(pred.result, function(x) x[[1]])
     colnames(sub.exp) <- inter.gene.list[seq.num]
