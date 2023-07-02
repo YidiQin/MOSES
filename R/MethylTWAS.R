@@ -34,9 +34,15 @@ MethylTWAS <- function(example = FALSE, train.meth.file, train.exp.file, test.me
     data(test.meth)
   }
   else{
-    load(file=train.meth.file)
-    load(file=train.exp.file)
-    load(file=test.meth.file)
+    temp1 <- load(file=train.meth.file)
+    train.meth <- get(temp1)
+    rm(temp1)
+    temp2 <- load(file=train.exp.file)
+    train.exp <- get(temp2)
+    rm(temp2)
+    temp3 <- load(file=test.meth.file)
+    test.meth <- get(temp3)
+    rm(temp3)
   }
   #train.meth <- read.table(train.meth.file,sep="\t", header=TRUE)
   print(head(train.meth))
