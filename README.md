@@ -1,4 +1,4 @@
-# Project Title
+# Methyl-TWAS
 
 Methyl-TWAS is a powerful method for precise in silico transcriptome-wide association studies (TWAS) using long-range DNA methylation.
 
