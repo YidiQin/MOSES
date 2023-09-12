@@ -15,7 +15,13 @@ An in-depth paragraph about your project and overview of use.
 
 ### Installing
 
-* How/where to download your program
+* How/where to download the package:
+```
+install.packages("devtools")
+library(devtools)
+install_github("YidiQin/MethylTWAS", force = TRUE)
+library(MethylTWAS)
+```
 * Any modifications needed to be made to files/folders
 
 ### Executing program
