@@ -1,3 +1,4 @@
+
 MatchPos <- function(data){
   loc <- read.table("/ix/ksoyeon/geneEXPLORE/Annotation_Probe_Location.txt",header=TRUE)
   loc2 <- loc[loc$ProbeID%in%rownames(data),]
