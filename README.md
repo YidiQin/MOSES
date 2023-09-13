@@ -46,10 +46,15 @@ code blocks for commands
 
 ## Authors
 
-Contributors names and contact info
+* Contributors names and contact info:
 
 Yidi Qin \
-yiq22@pitt.edu
+yiq22@pitt.edu \
+
+\
+
+Soyeon Kim \
+soyeon.kim21@chp.edu \
 
 ## Version History
 
