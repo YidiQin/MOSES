@@ -34,7 +34,8 @@ library(MethylTWAS)
 * How to run Methyl-TWAS: \
 The public available Methyl-TWAS R-package offers 2 modes. In the first mode, users can train the model and conduct TWAS using any type of tissue. Users input the training (reference) data consisting of DNA methylation and gene expression data for the same subjects to estimate tissue-specific effects of DNA methylation on expression levels of each gene and then input testing data of DNA methylation and a phenotype to impute gene expression and then conduct in silico TWAS. In the second mode, users can skip step 1 and just conduct TWAS using a test data set (DNA methylation) of nasal epithelium (upper airway) tissue. Users input DNA methylation and a phenotype and then, Methyl-TWAS uses the estimated coefficients from our reference data, EVA-PR, to impute gene expression and conduct in silico TWAS without requiring further reference data.
 
-To help users gain a better understanding of input and output files, we provide example datasets generated from Yang et al. (GSE65205) which can be used directly after installing the package. Example datasets include two subsetted methylation matrix (train.meth.1.rda, train.meth.2.rda), a subsetted gene expression matrix (train.exp.rda) as trainning data, and a subsetted methylation matrix (test.meth.rda) as test data. Example phenotype data is also provided within the package (pheno.rda).
+* Example data: \
+To help users gain a better understanding of input and output files, we provide example datasets generated from Yang et al. (GSE65205) which can be directly used after package installation. Example datasets include two subsetted methylation matrix (train.meth.1.rda, train.meth.2.rda), a subsetted gene expression matrix (train.exp.rda) as trainning data, a subsetted methylation matrix (test.meth.rda) as test data, and a phenotype data file (pheno.rda) to be used in TWAS analysis.
 
 * Mode 1:
 ```
