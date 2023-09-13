@@ -37,10 +37,20 @@ The public available Methyl-TWAS R-package offers 2 modes. In the first mode, us
 * Example data: \
 To help users gain a better understanding of input and output files, we provide example datasets generated from Yang et al. (GSE65205) which can be directly used after package installation. Example datasets include two subsetted methylation matrix (train.meth.1.rda, train.meth.2.rda), a subsetted gene expression matrix (train.exp.rda) as trainning data, a subsetted methylation matrix (test.meth.rda) as test data, and a phenotype data file (pheno.rda) to be used in TWAS analysis.
 
-* Mode 1:
+* Mode 1: \
+By running function "MethylTWAS", users are able to input customized training data, test data, and phenotype data. To use example data in this mode, users can set "example = T" when running the function. An demo of running the function is showed below:
 ```
-code blocks for commands
+MethylTWAS(example = F,
+           train.meth.file = "/ix/ksoyeon/YQ/code/MethylTWAS/data/train.meth.rda",
+           test.meth.file = "/ix/ksoyeon/YQ/code/MethylTWAS/data/test.meth.rda",
+           train.exp.file = "/ix/ksoyeon/YQ/code/MethylTWAS/data/train.exp.rda",
+           pheno.file = "/ix/ksoyeon/YQ/code/MethylTWAS/data/pheno.rda",
+           output.file.path = "/ix/ksoyeon/YQ/results/test/",
+           phenotype = "cc_new",
+           confounder = "gender, age")
 ```
+There are two output files in the folder specified by output.file.path:
+
 
 * Mode 2:
 ```
