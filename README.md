@@ -40,7 +40,7 @@ To help users gain a better understanding of input and output files, we provide 
 * Mode 1: \
 By running function "MethylTWAS", users are able to input customized training data, test data, and phenotype data. To use example data in this mode, users can set "example = T" when running the function. An demo of running the function is showed below:
 ```
-MethylTWAS(example = T,
+MethylTWAS(example = F,
            train.meth.file = "/ix/ksoyeon/YQ/code/MethylTWAS/data/train.meth.rda",
            test.meth.file = "/ix/ksoyeon/YQ/code/MethylTWAS/data/test.meth.rda",
            train.exp.file = "/ix/ksoyeon/YQ/code/MethylTWAS/data/train.exp.rda",
@@ -52,15 +52,29 @@ MethylTWAS(example = T,
 ```
 There are two output files in the folder specified by output.file.path:
 ```
-ls "/ix/ksoyeon/YQ/results/test/"
+ls /ix/ksoyeon/YQ/results/test/
 prediction.Rdata  TWAS.result.txt
 ```
 prediction.Rdata is a matrix containing gene expression value predicted using train.meth.rda and train.exp.rda. TWAS.result.txt is a matrix containing TWAS results.
 
-* Mode 2:
+* Mode 2: \
+By running function "MethylTWAS_BySummary", users are able to directly use pre-generated coefficients for prediction. To use example data in this mode, users can set "example = T" when running the function. An demo of running the function is showed below:
 ```
-code blocks for commands
+MethylTWAS_BySummary(example = F,
+           test.meth.file = "/ix/ksoyeon/YQ/data/Yang.meth.rda",
+           TWAS = T,
+           pheno.file = "/ix/ksoyeon/YQ/data/Yang.pheno.rda",
+           output.file.path = "/ix/ksoyeon/YQ/results/test_EVA_PR_on_Yang/",
+           phenotype = "cc_new",
+           confounder = "gender, age",
+           core.num = 1)
 ```
+There are two output files in the folder specified by output.file.path:
+```
+ls /ix/ksoyeon/YQ/results/test_EVA_PR_on_Yang/
+prediction.Rdata  TWAS.result.txt
+```
+prediction.Rdata is a matrix containing gene expression value predicted using train.meth.rda and train.exp.rda. TWAS.result.txt is a matrix containing TWAS results.
 
 ## Authors
 
