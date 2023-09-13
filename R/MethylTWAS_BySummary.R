@@ -41,6 +41,7 @@ MethylTWAS_BySummary <- function(example, test.meth.file, TWAS = TRUE, pheno.fil
   rownames(pred.gene.exp) <- names(sub.exp)
   colnames(pred.gene.exp) <- colnames(test.meth)
   pred.gene.exp <- pred.gene.exp
+  message("Saving predicted gene expression ...")
   save(list=c('pred.gene.exp'), file=paste0(output.file.path,"prediction.Rdata"))
 
   ###### TWAS #####
@@ -56,6 +57,7 @@ MethylTWAS_BySummary <- function(example, test.meth.file, TWAS = TRUE, pheno.fil
     pheno <- get(temp4)
     rm(temp4)
   }
+  message("Running TWAS ...")
   library(limma)
   confounder.var<- paste(unlist(strsplit(confounder, split = ",")),collapse="+")
   design <- model.matrix(as.formula(paste0("~0+",as.character(phenotype),"+",confounder.var)), data=pheno)
@@ -68,5 +70,6 @@ MethylTWAS_BySummary <- function(example, test.meth.file, TWAS = TRUE, pheno.fil
   fit2 <- contrasts.fit(fit, cont.matrix)
   fit2 <- eBayes(fit2)
   imputed.TWAS <- topTable(fit2, adjust="BH",number = Inf)
+  message("Saving TWAS results...")
   write.table(imputed.TWAS, paste0(output.file.path,"TWAS.result.txt"),quote=F,sep="\t",col.names = TRUE, row.names = TRUE)
 }

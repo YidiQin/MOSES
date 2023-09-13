@@ -66,8 +66,8 @@ MethylTWAS <- function(example = FALSE, train.meth.file, train.exp.file, test.me
     seq.num <- which(rowSums(pred.gene.exp) == 0)
   }
   pred.gene.exp <- pred.gene.exp
-  save(list=c('pred.gene.exp'), file=paste0(output.file.path,"prediction.Rdata"))
   message("Saving predicted gene expression ...")
+  save(list=c('pred.gene.exp'), file=paste0(output.file.path,"prediction.Rdata"))
 
   ###### TWAS #####
   if(TWAS == FALSE){
@@ -95,6 +95,6 @@ MethylTWAS <- function(example = FALSE, train.meth.file, train.exp.file, test.me
   fit2 <- contrasts.fit(fit, cont.matrix)
   fit2 <- eBayes(fit2)
   imputed.TWAS <- topTable(fit2, adjust="BH",number = Inf)
-  write.table(imputed.TWAS, paste0(output.file.path,"TWAS.result.txt"),quote=F,sep="\t",col.names = TRUE, row.names = TRUE)
   message("Saving TWAS results ...")
+  write.table(imputed.TWAS, paste0(output.file.path,"TWAS.result.txt"),quote=F,sep="\t",col.names = TRUE, row.names = TRUE)
 }
