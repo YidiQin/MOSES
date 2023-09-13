@@ -82,6 +82,7 @@ MethylTWAS <- function(example = FALSE, train.meth.file, train.exp.file, test.me
     pheno <- get(temp4)
     rm(temp4)
   }
+  message("Running TWAS ...")
   library(limma)
   confounder.var<- paste(unlist(strsplit(confounder, split = ",")),collapse="+")
   design <- model.matrix(as.formula(paste0("~0+",as.character(phenotype),"+",confounder.var)), data=pheno)
@@ -95,4 +96,5 @@ MethylTWAS <- function(example = FALSE, train.meth.file, train.exp.file, test.me
   fit2 <- eBayes(fit2)
   imputed.TWAS <- topTable(fit2, adjust="BH",number = Inf)
   write.table(imputed.TWAS, paste0(output.file.path,"TWAS.result.txt"),quote=F,sep="\t",col.names = TRUE, row.names = TRUE)
+  message("Saving TWAS results ...")
 }
