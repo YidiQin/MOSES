@@ -1,29 +1,3 @@
-#load("/ix/ksoyeon/eQTMs/GSE65205.data.Rdata") # observed expression for test
-
-#write.table(mvalue[,1:56], "/ix/ksoyeon/YQ/data/Yang.meth.train.txt",quote=F,sep="\t",col.names = TRUE, row.names = TRUE)
-#write.table(mvalue[,57:69], "/ix/ksoyeon/YQ/data/Yang.meth.test.txt",quote=F,sep="\t",col.names = TRUE, row.names = TRUE)
-#write.table(nonna.gene.exp[unique(row.names(nonna.gene.exp))[1:50],1:56], "/ix/ksoyeon/YQ/data/Yang.exp.train.txt",quote=F,sep="\t",col.names = TRUE, row.names = TRUE)
-#write.table(pheno[57:69,],"/ix/ksoyeon/YQ/data/Yang.pheno.txt",quote=F,sep="\t",col.names = TRUE, row.names = TRUE)
-
-#train.meth.file <- "/ix/ksoyeon/YQ/code/MethylTWAS/data/train.meth.rda"
-#test.meth.file <- "/ix/ksoyeon/YQ/data/Yang.meth.test.txt"
-#train.exp.file <- "/ix/ksoyeon/YQ/data/Yang.exp.train.txt"
-#output.file.path <- "/ix/ksoyeon/YQ/results/test/"
-#pheno.file <-"/ix/ksoyeon/YQ/data/Yang.pheno.txt"
-
-#train.meth.1 <- mvalue[1:200000,1:56]
-#train.meth.2 <- mvalue[200001:423516,1:56]
-#test.meth <- mvalue[,57:69]
-#train.exp <- nonna.gene.exp[unique(row.names(nonna.gene.exp))[1:50],1:56]
-#load("/ix/ksoyeon/YQ/code/MethylTWAS/data/promoter.rda")
-
-#library(usethis)
-#use_data(train.meth.1, overwrite = TRUE)
-#use_data(train.meth.2, overwrite = TRUE)
-#use_data(test.meth, overwrite = TRUE)
-#use_data(train.exp, overwrite = TRUE)
-#use_data(promoter, overwrite = TRUE)
-
 MethylTWAS <- function(example = FALSE, train.meth.file, train.exp.file, test.meth.file, TWAS = TRUE, pheno.file, phenotype, confounder, output.file.path, core.num = 1) {
   message("Importing data ...")
   if(example == TRUE){
@@ -44,13 +18,10 @@ MethylTWAS <- function(example = FALSE, train.meth.file, train.exp.file, test.me
     test.meth <- get(temp3)
     rm(temp3)
   }
-  #train.meth <- read.table(train.meth.file,sep="\t", header=TRUE)
   library(GenomicRanges)
   train.meth.pos.range <- MatchPos(train.meth)
-  #train.exp <- read.table(train.exp.file,sep="\t", header=TRUE)
-  #test.meth <- read.table(test.meth.file,sep="\t", header=TRUE)
-
   message("Matching probes ...")
+
   ##### find which methylation probes in testing data are also in annotation set as well as training data #####
   int_probe <- intersect(rownames(test.meth),rownames(train.meth))
   test.meth <- test.meth[rownames(test.meth) %in% int_probe,]
@@ -58,8 +29,6 @@ MethylTWAS <- function(example = FALSE, train.meth.file, train.exp.file, test.me
   train.meth.pos.range <- train.meth.pos.range[train.meth.pos.range$name %in% rownames(train.meth),]
 
   ##### load promoter info #####
-  #promoter<-read.delim("/ix/ksoyeon/eQTMs/hg19_promoter.txt")
-  #load("/ix/ksoyeon/YQ/code/MethylTWAS/data/promoter.rda")
   data(promoter)
   promoter.range <- GRanges(seqnames = promoter$chrID, ranges = IRanges(start=promoter$start, end=promoter$end), strand = promoter$strand, gene.name =promoter$gene.name)
 
@@ -112,31 +81,18 @@ MethylTWAS <- function(example = FALSE, train.meth.file, train.exp.file, test.me
     temp4 <- load(file = pheno.file)
     pheno <- get(temp4)
     rm(temp4)
-    #pheno <- read.table(pheno.file,sep="\t", header=TRUE)
   }
   library(limma)
-  #print('pass000')
   confounder.var<- paste(unlist(strsplit(confounder, split = ",")),collapse="+")
-  #print('pass00')
-  #formula <- paste0("~0+",as.character(phenotype),"+",confounder.var)
-  #cmd0 <- paste("design <- model.matrix(as.formula(", formula, "), data=pheno)", sep = '')
-  #eval(parse(text = cmd0))
   design <- model.matrix(as.formula(paste0("~0+",as.character(phenotype),"+",confounder.var)), data=pheno)
-  #print('pass0')
   fit <- lmFit(pred.gene.exp, design)
-  #print("pass1")
   a <- paste0(as.character(phenotype),"TRUE")
   b <- paste0(as.character(phenotype),"FALSE")
-  #cont.matrix <- makeContrasts(paste0("CasevsControl=",a,"-",b), levels=design)
-  #print("pass2")
   contrast <- paste0("CasevsControl=",a,"-",b)
   cmd <- paste("cont.matrix <- makeContrasts(", contrast, ", levels = design)", sep ='')
   eval(parse(text = cmd))
-  #print("pass3")
   fit2 <- contrasts.fit(fit, cont.matrix)
   fit2 <- eBayes(fit2)
   imputed.TWAS <- topTable(fit2, adjust="BH",number = Inf)
   write.table(imputed.TWAS, paste0(output.file.path,"TWAS.result.txt"),quote=F,sep="\t",col.names = TRUE, row.names = TRUE)
 }
-
-#MethylTWAS(train.meth.file = "/data/Yang.meth.train.txt", test.meth.file = "/ix/ksoyeon/YQ/data/Yang.meth.test.txt", train.exp.file = "/ix/ksoyeon/YQ/data/Yang.exp.train.txt",pheno.file="/ix/ksoyeon/YQ/data/Yang.pheno.txt",output.file.path = "/ix/ksoyeon/YQ/results/test/")
