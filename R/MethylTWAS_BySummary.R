@@ -1,3 +1,19 @@
+#' Train gene expression prediction model and conduct TWAS using estimated coefficients
+#'
+#' @param example An indicator to input example datasets. Default is FALSE.
+#' @param test.meth.file A file containing methylation matrix as test data.
+#' @param TWAS An indicator to perform TWAS analysis. Default is TRUE.
+#' @param pheno.file A file containing phenotype information.
+#' @param pheno The name of outcome of interest in TWAS.
+#' @param confounder Names of variables to be adjusted in TWAS.
+#' @param output.file.path The path/directory to store output files.
+#' @param core.num The number of cores to be used. Default is 1.
+#' @return Two output files in the folder specified by output.file.path: 1) prediction.Rdata is a matrix containing gene expression value predicted using train.meth.rda and train.exp.rda 2) TWAS.result.txt is a matrix containing TWAS results.
+#'
+#' @examples
+#' MethylTWAS_BySummary(example = F, test.meth.file = "/ix/ksoyeon/YQ/code/MethylTWAS/data/test.meth.rda",pheno.file = "/ix/ksoyeon/YQ/code/MethylTWAS/data/pheno.rda",output.file.path = "/ix/ksoyeon/YQ/results/test/",TWAS = T,phenotype = "cc_new",confounder = "gender, age")
+#' MethylTWAS_BySummary(example = T, output.file.path = "/ix/ksoyeon/YQ/results/test/",TWAS = T,phenotype = "cc_new",confounder = "gender, age")
+
 MethylTWAS_BySummary <- function(example, test.meth.file, TWAS = TRUE, pheno.file, phenotype, confounder, output.file.path, core.num = 1) {
   message("Importing data ...")
   if(example == TRUE){
