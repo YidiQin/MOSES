@@ -14,7 +14,7 @@
 #' MethylTWAS_BySummary(example = F, test.meth.file = "/ix/ksoyeon/YQ/code/MethylTWAS/data/test.meth.rda",pheno.file = "/ix/ksoyeon/YQ/code/MethylTWAS/data/pheno.rda",output.file.path = "/ix/ksoyeon/YQ/results/test/",TWAS = T,phenotype = "cc_new",confounder = "gender, age")
 #' MethylTWAS_BySummary(example = T, output.file.path = "/ix/ksoyeon/YQ/results/test/",TWAS = T,phenotype = "cc_new",confounder = "gender, age")
 
-MethylTWAS_BySummary <- function(example, test.meth.file, TWAS = TRUE, pheno.file, phenotype, confounder, output.file.path, core.num = 1) {
+MethylTWAS_BySummary <- function(example = TRUE, test.meth.file, TWAS = TRUE, pheno.file, phenotype, confounder, output.file.path, core.num = 1) {
   message("Importing data ...")
   if(example == TRUE){
     data(test.meth)
