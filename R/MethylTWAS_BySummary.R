@@ -54,12 +54,13 @@ MethylTWAS_BySummary <- function(example = TRUE, test.meth.file, TWAS = TRUE, ph
                        test.meth, lambda.rule, n, output.file.path, core.num)
   load(paste(output.file.path,".",k,"th.running.Rdata",sep=""))
   sub.exp <- sapply(pred.result, function(x) x[[1]])
-  names(sub.exp) <- inter.gene.list[seq.num]
-  var <- sapply(sub.exp, function(x) var(x))
+  colnames(sub.exp) <- inter.gene.list[seq.num]
+  var <- apply(sub.exp,2,var)
   bad.pre <- which(var == 0 | is.na(var))
-  sub.exp <- sub.exp[-bad.pre]
-  pred.gene.exp <- as.data.frame(t(matrix(unlist(sub.exp), nrow=length(unlist(sub.exp[1])))))
-  rownames(pred.gene.exp) <- names(sub.exp)
+  if(length(bad.pre) > 0){
+    sub.exp <- sub.exp[,-bad.pre]
+    }
+  pred.gene.exp <- as.data.frame(t(sub.exp))
   colnames(pred.gene.exp) <- colnames(test.meth)
   pred.gene.exp <- pred.gene.exp
   message("Saving predicted gene expression ...")
