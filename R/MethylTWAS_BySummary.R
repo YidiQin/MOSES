@@ -34,10 +34,10 @@ MethylTWAS_BySummary <- function(example = TRUE, test.meth.file, TWAS = TRUE, ph
   ##### select genes with promoter info and in test data #####
   data("valid_genes")
   all.test.cvfit <- all.test.cvfit[names(all.test.cvfit) %in% valid_genes$x]
-  inter.gene.list <- names(all.test.cvfit)
   if(example == TRUE){
-    inter.gene.list <- inter.gene.list[1:10]
+    all.test.cvfit <- all.test.cvfit[1:10]
   }
+  inter.gene.list <- names(all.test.cvfit)
 
   ##### prediction parameters #####
   curi<-1
