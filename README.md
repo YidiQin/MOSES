@@ -38,7 +38,7 @@ The public available MOSES R-package offers 2 modes. In the first mode, users ca
 To help users gain a better understanding of input and output files, we provide example datasets generated from Yang et al. (GSE65205) which can be directly used after package installation. Example datasets include two subsetted methylation matrix (train.meth.1.rda, train.meth.2.rda), a subsetted gene expression matrix (train.exp.rda) as trainning data, a subsetted methylation matrix (test.meth.rda) as test data, and a phenotype data file (pheno.rda) to be used in TWAS analysis.
 
 * Mode 1: \
-By running function "MethylTWAS", users are able to input customized training data, test data, and phenotype data. To use example data in this mode, users can set "example = T" when running the function. An demo of running the function is showed below:
+By running function "MOSES", users are able to input customized training data, test data, and phenotype data. To use example data in this mode, users can set "example = T" when running the function. An demo of running the function is showed below:
 ```
 MOSES(example = F,
       train.meth.file = "/ix/ksoyeon/YQ/code/MethylTWAS/data/train.meth.rda",
@@ -58,7 +58,7 @@ prediction.Rdata  TWAS.result.txt
 prediction.Rdata is a matrix containing gene expression value predicted using train.meth.rda and train.exp.rda. TWAS.result.txt is a matrix containing TWAS results.
 
 * Mode 2: \
-By running function "MethylTWAS_BySummary", users are able to directly use pre-generated coefficients for prediction. To use example data in this mode, users can set "example = T" when running the function. An demo of running the function is showed below:
+By running function "MOSES_BySummary", users are able to directly use pre-generated coefficients for prediction. To use example data in this mode, users can set "example = T" when running the function. An demo of running the function is showed below:
 ```
 MOSES_BySummary(example = F,
            test.meth.file = "/ix/ksoyeon/YQ/data/Yang.meth.rda",
