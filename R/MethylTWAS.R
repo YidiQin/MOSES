@@ -16,7 +16,7 @@
 #' MethylTWAS(example = F, train.meth.file = "/ix/ksoyeon/YQ/code/MethylTWAS/data/train.meth.rda",test.meth.file = "/ix/ksoyeon/YQ/code/MethylTWAS/data/test.meth.rda",train.exp.file = "/ix/ksoyeon/YQ/code/MethylTWAS/data/train.exp.rda",pheno.file = "/ix/ksoyeon/YQ/code/MethylTWAS/data/pheno.rda",output.file.path = "/ix/ksoyeon/YQ/results/test/",TWAS = T,phenotype = "cc_new",confounder = "gender, age")
 #' MethylTWAS(example = T, output.file.path = "/ix/ksoyeon/YQ/results/test/",TWAS = T,phenotype = "cc_new",confounder = "gender, age")
 
-MethylTWAS <- function(example = TRUE, train.meth.file, train.exp.file, test.meth.file, TWAS = TRUE, pheno.file, phenotype, confounder, output.file.path, core.num = 1) {
+MOSES <- function(example = TRUE, train.meth.file, train.exp.file, test.meth.file, TWAS = TRUE, pheno.file, phenotype, confounder, output.file.path, core.num = 1) {
   message("Importing data ...")
   if(example == TRUE){
     data(train.meth.1)
