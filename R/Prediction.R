@@ -1,4 +1,4 @@
-##### A function to predict gene exp for test data using well-trained model #####
+##### A function to predict gene exp for test data by model training #####
 library(glmnet)
 prediction <- function(seq.num, k, inter.gene.list, promoter.range, enhancer.range, train.meth.pos.range, train.exp, train.meth, test.meth, lambda.rule, n, output.file.path, core.num) {
   sub.gene.list <- inter.gene.list[seq.num] # select a subset of gene
