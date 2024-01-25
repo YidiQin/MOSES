@@ -13,8 +13,8 @@
 #' @return Two output files in the folder specified by output.file.path: 1) prediction.Rdata is a matrix containing gene expression value predicted using train.meth.rda and train.exp.rda 2) TWAS.result.txt is a matrix containing TWAS results.
 #'
 #' @examples
-#' MethylTWAS(example = F, train.meth.file = "/ix/ksoyeon/YQ/code/MethylTWAS/data/train.meth.rda",test.meth.file = "/ix/ksoyeon/YQ/code/MethylTWAS/data/test.meth.rda",train.exp.file = "/ix/ksoyeon/YQ/code/MethylTWAS/data/train.exp.rda",pheno.file = "/ix/ksoyeon/YQ/code/MethylTWAS/data/pheno.rda",output.file.path = "/ix/ksoyeon/YQ/results/test/",TWAS = T,phenotype = "cc_new",confounder = "gender, age")
-#' MethylTWAS(example = T, output.file.path = "/ix/ksoyeon/YQ/results/test/",TWAS = T,phenotype = "cc_new",confounder = "gender, age")
+#' MOSES_cis(example = F, train.meth.file = "/ix/ksoyeon/YQ/code/MethylTWAS/data/train.meth.rda",test.meth.file = "/ix/ksoyeon/YQ/code/MethylTWAS/data/test.meth.rda",train.exp.file = "/ix/ksoyeon/YQ/code/MethylTWAS/data/train.exp.rda",pheno.file = "/ix/ksoyeon/YQ/code/MethylTWAS/data/pheno.rda",output.file.path = "/ix/ksoyeon/YQ/results/test/",TWAS = T,phenotype = "cc_new",confounder = "gender, age")
+#' MOSES_cis(example = T, output.file.path = "/ix/ksoyeon/YQ/results/test/",TWAS = T,phenotype = "cc_new",confounder = "gender, age")
 
 MOSES_cis <- function(example = TRUE, train.meth.file, train.exp.file, test.meth.file, TWAS = TRUE, pheno.file, phenotype, confounder, output.file.path, core.num = 1) {
   message("Importing data ...")
