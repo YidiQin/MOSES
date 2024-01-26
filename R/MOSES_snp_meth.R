@@ -56,6 +56,7 @@ MOSES_snp_meth <- function(example = TRUE, train.meth.file, train.exp.file, test
   train.meth.pos.range <- train.meth.pos.range[train.meth.pos.range$name %in% rownames(train.meth),]
 
   ##### get genotype file information ####
+  genotype.file.list <- as.data.frame(genotype.file.list)
   chr.list <- as.numeric(genotype.file.list$chr)
 
   ###### prediction by chr #####
