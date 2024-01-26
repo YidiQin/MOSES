@@ -25,7 +25,7 @@ MOSES_snp_meth <- function(example = TRUE, train.meth.file, train.exp.file, test
     train.meth <- rbind(train.meth.1, train.meth.2)
     data(train.exp)
     data(test.meth)
-    data(genotype.file.list.file)
+    data(genotype.file.list)
   }
   else{
     temp1 <- load(file=train.meth.file)
