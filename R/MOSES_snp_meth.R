@@ -4,7 +4,7 @@
 #' @param train.meth.file A file containing methylation matrix as training data.
 #' @param train.exp.file A file containing gene expression matrix as training data.
 #' @param test.meth.file A file containing methylation matrix as test data.
-#' @param genotype.file.list A txt file containing three columns named as "chr", "train.snp.file", and "test.snp.file". The "chr" column contains numeric chromosome number (e.g. 1, 2, ..., 22); the "train.snp.file" contains the directory of the training set genotype file from the corresponding chr; the "train.snp.file" contains the directory of the test set genotype file from the corresponding chr
+#' @param genotype.file.list.file A txt file containing three columns named as "chr", "train.snp.file", and "test.snp.file". The "chr" column contains numeric chromosome number (e.g. 1, 2, ..., 22); the "train.snp.file" contains the directory of the training set genotype file from the corresponding chr; the "train.snp.file" contains the directory of the test set genotype file from the corresponding chr
 #' @param TWAS An indicator to perform TWAS analysis. Default is TRUE.
 #' @param pheno.file A file containing phenotype information.
 #' @param pheno The name of outcome of interest in TWAS.
@@ -17,7 +17,7 @@
 #' MOSES_snp_meth(example = F, train.meth.file = "/ix/ksoyeon/YQ/code/MethylTWAS/data/train.meth.rda",test.meth.file = "/ix/ksoyeon/YQ/code/MethylTWAS/data/test.meth.rda",train.exp.file = "/ix/ksoyeon/YQ/code/MethylTWAS/data/train.exp.rda",genotype.file.list="/ix/ksoyeon/YQ/code/MethylTWAS/data/genotype.file.list.txt",pheno.file = "/ix/ksoyeon/YQ/code/MethylTWAS/data/pheno.rda",output.file.path = "/ix/ksoyeon/YQ/results/test/",TWAS = T,phenotype = "cc_new",confounder = "gender, age")
 #' MOSES_snp_meth(example = T, output.file.path = "/ix/ksoyeon/YQ/results/test/",TWAS = T,phenotype = "cc_new",confounder = "gender, age")
 
-MOSES_snp_meth <- function(example = TRUE, train.meth.file, train.exp.file, test.meth.file, genotype.file.list, TWAS = TRUE, pheno.file, phenotype, confounder, output.file.path, core.num = 1) {
+MOSES_snp_meth <- function(example = TRUE, train.meth.file, train.exp.file, test.meth.file, genotype.file.list.file, TWAS = TRUE, pheno.file, phenotype, confounder, output.file.path, core.num = 1) {
   message("Importing data ...")
   if(example == TRUE){
     data(train.meth.1)
@@ -25,7 +25,7 @@ MOSES_snp_meth <- function(example = TRUE, train.meth.file, train.exp.file, test
     train.meth <- rbind(train.meth.1, train.meth.2)
     data(train.exp)
     data(test.meth)
-    data(genotype.file.list)
+    data(genotype.file.list.file)
   }
   else{
     temp1 <- load(file=train.meth.file)
@@ -37,7 +37,7 @@ MOSES_snp_meth <- function(example = TRUE, train.meth.file, train.exp.file, test
     temp3 <- load(file=test.meth.file)
     test.meth <- get(temp3)
     rm(temp3)
-    genotype.file.list <- read.table(genotype.file.list)
+    genotype.file.list <- read.table(genotype.file.list.file)
   }
 
   train.exp <- GenePos(train.exp)$gene.exp
@@ -54,7 +54,6 @@ MOSES_snp_meth <- function(example = TRUE, train.meth.file, train.exp.file, test
   train.meth.pos.range <- train.meth.pos.range[train.meth.pos.range$name %in% rownames(train.meth),]
 
   ##### get genotype file information ####
-  genotype.file.list <- as.data.frame(genotype.file.list)
   chr.list <- as.numeric(genotype.file.list$chr)
 
   ###### prediction by chr #####
