@@ -37,7 +37,9 @@ MOSES_snp_meth <- function(example = TRUE, train.meth.file, train.exp.file, test
     temp3 <- load(file=test.meth.file)
     test.meth <- get(temp3)
     rm(temp3)
-    genotype.file.list <- read.table(genotype.file.list)
+    temp4 <- read.table(genotype.file.list)
+    genotype.file.list <- get(temp4)
+    rm(temp4)
   }
 
   train.exp <- GenePos(train.exp)$gene.exp

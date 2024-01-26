@@ -1,3 +1,0 @@
-chr train.snp.file test.snp.file
-1 16 https://raw.githubusercontent.com/YidiQin/MOSES/master/data/train.snp.chr16 https://raw.githubusercontent.com/YidiQin/MOSES/master/data/test.snp.chr16
-2 17 https://raw.githubusercontent.com/YidiQin/MOSES/master/data/train.snp.chr17 https://raw.githubusercontent.com/YidiQin/MOSES/master/data/test.snp.chr17
